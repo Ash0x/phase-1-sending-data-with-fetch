@@ -1,21 +1,21 @@
 const submitData = (name, email) => {
-
 	return fetch('http://localhost:3000/users', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 			'Accept': 'application/json'
 		},
-		body: JSON.stringify({ name: name, email: email })
+		body: JSON.stringify({ name, email })
 	})
 		.then((res) => {
 			if (res.ok) {
 				return res.json()
 			}
-			throw new Error(res.status)
 		})
-		.then((data) => {return data})
+		.then((data) => {
+			document.body.innerHTML = data['id']
+		})
 		.catch((error) => {
-			document.body.append(error)
+			document.body.innerHTML = error.message
 		})
 }
